@@ -8,7 +8,7 @@ class OpsGenieTest < PapertrailServices::TestCase
   def test_logs
     svc = service(:logs, { :api_key => 'k' }, payload)
 
-    @stubs.post '/generic/2010-04-15/create_event.json' do |env|
+    @stubs.post '/api/v1/json/papertrail' do |env|
       [200, {}, '']
     end
 
