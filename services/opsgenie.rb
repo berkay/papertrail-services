@@ -1,14 +1,19 @@
 
-
 class Service::OpsGenie < Service
 
   def receive_logs
     raise_config_error 'Missing OpsGenie api key' if settings[:api_key].to_s.empty?
     
-    api_key = settings[:api_key].
+    api_key = settings[:api_key]
+    
+    params = {
+      :apiKey => settings[:api_key],
+      :payload => payload
+    }
+    url = "https://api.opsgenie.com/v1/json/papertrail"
     
 
-    resp = http_post "https://api.opsgenie.com/v1/json/papertrail?apiKey=#{api_key}", payload.to_json
+    resp = http_post url, params, 'Content-Type' => 'application/json'
       unless resp.success?
         error_body = Yajl::Parser.parse(resp.body) rescue nil
         
