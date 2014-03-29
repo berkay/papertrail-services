@@ -1,6 +1,4 @@
-# encoding: utf-8
 
-# Initial implementation by Mike Heffner:
 
 class Service::OpsGenie < Service
 
